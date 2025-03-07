@@ -37,5 +37,6 @@ jobs:
           tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
           tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
-          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
+          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-available/
+          systemctl restart nginx
           ENDSSH
