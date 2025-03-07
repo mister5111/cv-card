@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+
+<!-- Title & Metadata
+================================================= -->
+<meta charset="utf-8">
+<title>Yevhen Shevchenko - About</title>
+<meta name="description"        content="Front end developer and consultant for websites, web apps and web related projects">
+<meta name="keywords"           content="front end developer, web developer, web design, web consultant, ux, ui, html, css, javascript, js">
+<meta name="author"             content="Yevhen Shevchenko">
+
+<!-- Mobile Specific Metas
+================================================= -->
+<meta name="viewport"           content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Other Metadata
+================================================= -->
+<meta property="og:title"        content="Yevhen Shevchenko &bull; Front End Developer &amp; Consultant">
+<meta property="og:type"         content="Website">
+<meta property="og:url"          content="http://benweltman.com">
+<meta property="og:image"        content="http://benweltman.com/img/share-image_bg.jpg">
+<meta property="og:description"  content="Front end developer and consultant for websites, web apps and web related projects.">
+<meta property="og:site_name"    content="Yevhen Shevchenko &bull; Front End Developer &amp; Consultant">
+
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:creator"     content="@benweltman">
+<meta name="twitter:url"         content="http://benweltman.com">
+<meta name="twitter:title"       content="Yevhen Shevchenko &bull; Front End Developer &amp; Consultant">
+<meta name="twitter:description" content="Front end developer and consultant for websites, web apps and web related projects.">
+<meta name="twitter:image"       content="http://benweltman.com/img/share-image_bg.jpg">
+
+<!-- CSS
+================================================= -->
+<link rel="stylesheet" href="css/bw-core.css">
+
+<!-- Fonts
+================================================= -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- Favicons
+=================================================-->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="img/favicon.ico">
+
+<!-- JS
+=============================================== -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/bw-main.js"></script>
+
+<!-- Dynamic Date - Year - for Copyright (JS)
+================================================= -->
+<script> 
+    function SetYear() {
+        var thisDate=new Date();
+        var thisYear=thisDate.getFullYear();
+        document.getElementById('copyDate').innerHTML="&copy; "+thisYear;
+    }
+</script>
+
+</head>
+<body class="bg-dark about">
+
+<!-- Primary Page Layout
+================================================== -->
+    
+<header class="navbar navbar-expand-md navbar-dark bd-navbar bg-dark border-bottom border-dark-subtle sticky-top">
+
+  <nav class="container flex-wrap flex-md-nowrap" aria-label="Main navigation">
+
+    <a href="index.html" aria-label="Bootstrap" class="d-flex align-items-center navbar-brand rounded-1 header-link">
+        <img src="img/bw-logo-lg.png" alt="Yevhen Shevchenko logo" class="header-logo" style="max-width: 50px;" />
+        <span class="d-inline font-24 me-2">Yevhen Shevchenko</span>
+    </a>
+
+    <button class="btn btn-dark navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation" onclick="menuSwitcher()">
+        <svg class="menu-icon d-block" xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 0 24 24" width="32px" fill="#fff">
+            <path d="M0 0h24v24H0V0z" fill="none"></path>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+        </svg>
+        <svg class="close-icon d-none" xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 0 24 24" width="32px" fill="#fff">
+            <path d="M0 0h24v24H0V0z" fill="none"></path>
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+        </svg>
+    </button>
+
+    <div class="navbar-collapse collapse" id="bdNavbar">
+      <ul class="navbar-nav flex-row flex-wrap mt-4 mt-md-0 ms-md-auto gap-md-2 justify-content-between align-items-center">
+        <li class="nav-item lh-base">
+          <a class="nav-link font-20 p-2 rounded-1 text-center w-100" aria-current="true" href="index.html">Home</a>
+        </li>
+     
+        <li class="nav-item lh-base">
+          <a class="nav-link font-20 p-2 rounded-1 text-center w-100 active" href="about.html">About</a>
+        </li>
+        <li class="nav-item switchBtn lh-base">            
+            <a class="nav-link font-20 p-2 rounded-1 text-center switch" href="#" onclick="modeSwitcher()" title="Mode switcher">
+                <span class="material-icons font-24 align-text-top switch-icon" aria-hidden="true">light_mode</span>
+            </a>
+        </li>
+        <li class="nav-item switchBtn lh-base">
+            <div class="dropdown">
+                <div class="dropdown-menu dropdown-menu-end p-2 position-absolute" aria-labelledby="dropdownMenuButton1">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="material-icons font-24 text-primary me-1">edit</span>
+                        <span class="font-16">Change Colour</span>
+                    </div><!-- end d-flex -->
+                    <div class="bg-light rounded-1 p-2">
+                      <div class="col-12 mb-1">
+                        <div class="d-block w-100">
+                          <div class="input-group colour-switch-input">
+                            <input type="color" id="primary" class="form-control lh-lg" onchange="getPrimaryColor()"/>
+                            <input type="text" id="prival" class="form-control font-11 lh-sm"  value="#5aa1ad"/>
+                          </div><!-- end input-group -->
+                        </div><!-- end d-block -->
+                      </div><!-- end col-12 -->                
+                    </div><!-- end bg-light -->
+                </div><!-- end dropdown menu -->
+            </div><!-- end dropdown -->
+        </li>
+      </ul>
+    </div><!-- end navbar -->
+
+  </nav>
+
+</header>
+
+<main class="bg-dark">
+    
+    <div class="container pt-2">
+
+        <div class="row my-4">
+            
+            <div class="col-12">                
+                <h2>My Story</h2>
+            </div><!-- end col-12 -->
+
+        </div><!-- end row -->
+
+        <div class="row d-flex justify-content-lg-start justify-content-center">
+
+            <div class="col-lg-3 col-6 mb-lg-0 mb-4">                
+                <img src="img/me-02-bw.jpg" alt="picture of Yevhen Shevchenko" class="border border-2 border-primary rounded-1 w-100"/>
+            </div><!-- end col-lg-3 -->
+            
+            <div class="col-lg-9 col-12 text-justify px-4 px-sm-0">
+                <p>
+                    I started my journey in IT in 2013. I started as a young IT engineer and gained experience from my senior colleagues.
+                </p>
+                <p>
+                    Having gained some experience, I got bored in the company, I realized that I was "standing still" and there was no development. Having changed the company, I got a chance to rely only on my experience and knowledge. I ended up in a company where there was no IT infrastructure at all, one PC in the closet was all that was there... a router as an Internet gateway... I won't even mention security...
+                </p>
+                <p>
+                    A server was rented from the Hetzner hosting company. A vmware esxi server was installed, a domain controller, a terminal server were raised, PfSense + Snort were used as an Internet gateway, the Internet gateway equipment was replaced with mikrotik at the branches, VPN tunnels were built, and a Zabbix server monitoring was added, and veeam backup was configured on Hetzner storage. This is how I consolidated the experience I gained in my previous company.
+                </p>
+                <p>
+                    The next stage in my career I was involved in the telephone company and mikrotik a lot of mikrotik... The company went bankrupt... Without sitting still, I started developing myself... With my new knowledge, I was invited to the position of DevOps.
+                </p>
+                <p>
+                    I am always interested in new projects and ideas, so if your company has an open position for DevOps, I would be happy to discuss <a href="mailto:rootroot511@gmail.com?Subject=Website Contact" class="rounded-1 p-1">contact me</a>.
+                </p>     
+            </div><!-- end col-lg-9 -->
+
+        </div><!-- end row -->
+
+        <div class="row my-4">
+
+            <div class="col-12">
+                
+                <h2 class="">My CV</h2>
+
+            </div><!-- end col-12 -->
+            
+        </div><!-- end row -->
+
+        <div class="cv-accordion">
+
+            <div class="row">
+
+                <div class="col-12">                
+
+                    
+
+                </div><!-- end col-12 -->
+                
+            </div><!-- end row -->
+
+            <div class="row">
+
+                <div class="col-12">                
+
+                    <a class="d-flex align-items-center font-18 mb-4 p-2 text-primary w-100" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                      Experience
+                      <i class="material-icons font-24 ms-auto" aria-hidden="true">expand_more</i>
+                    </a>
+
+                    <div class="collapse px-3" id="collapse2">
+                        <div class="d-inline-flex align-items-center w-100">
+                            <p class="text-primary">System Administrator @ <a href="https://www.facebook.com/avxgroupdp/" target="_blank">avxgroupdp</a></p>
+                            <p class="text-primary ms-auto"><b>2013-2017</b></p>
+                        </div>
+                        <p class="text-justify">
+                            Main responsibilities: support for the work of an office of 100+ people, transfer of the company's infrastructure to the Hetzner cloud
+                        </p>
+                        <p>Some of those projects included:</p>
+                            <ul class="text-justify">
+                                <li>Deployment, configuration, maintenance, monitoring of cloud infrastructure.</li>
+                                <li>Workstation maintenance.</li>
+                                <li>27/7 support.</li>
+                                <li>Repair, purchase of new equipment.</li>
+                            </ul>
+                        </p>
+
+                        <div class="d-inline-flex align-items-center w-100">
+                            <p class="text-primary text-justify">System Administrator @ <a href="https://vashaoptyka.com/uk/" target="_blank">Vasha-Optyka</a></p>
+                            <p class="text-primary ms-auto"><b>2017-2018</b></p>
+                        </div>
+                        <p class="text-justify">
+                            Main responsibilities: creation of company infrastructure.
+                        </p>
+                        <p>Some of those projects included:</p>
+                            <ul class="text-justify">
+                                <li>Deployment, configuration, maintenance, monitoring of cloud infrastructure. All responsibility is entirely mine. I created and maintained one!</li>
+                                <li>Transfer of all branches to a new operating scheme</li>
+                                <li>Building VPN tunnels PfSense + Mikrotik</li>
+                            </ul>
+                        </p>
+                        <div class="d-inline-flex align-items-center w-100">
+                            <p class="text-primary text-justify">System Administrator @ <a href="https://www.badm.ua/ua/" target="_blank">BaDM</a></p>
+                            <p class="text-primary ms-auto"><b>2018-2020</b></p>
+                        </div>
+                        <p class="text-justify">
+                            Main responsibilities: Responsible for the company's telephony, mikrotik, infrastructure monitoring.
+                        </p>
+                        <p>Some of those projects included:</p>
+                            <ul class="text-justify">
+                                <li>9 company telephony servers in different cities, support in working condition.</li>
+                                <li>Preparing for transfer to new software</li>
+                                <li>Setup configuration mikrotik</li>
+                                <li>Maintenance of the Oktell telephone complex</li>
+                            </ul>
+                        </p>
+                        <div class="d-inline-flex align-items-center w-100">
+                            <p class="text-primary text-justify">DevOps Web-Source Technology Ltd @ <a href="https://www.linkedin.com/company/websource-technology-ltd/" target="_blank">Web-Source Technology Ltd</a></p>
+                            <p class="text-primary ms-auto"><b>2021-Now</b></p>
+                        </div>
+                        <p class="text-justify">
+                            Main responsibilities: Implementation of new technologies in current tasks.
+                        </p>
+                        <p>Some of those projects included:</p>
+                            <ul class="text-justify">
+                                <li>Creation and modernization of ansible playbook.</li>
+                                <li>Preparing for transfer to new software</li>
+                                <li>Working with Terraform, Git, Ci/CD</li>
+                                <li>Signing drivers for windows</li>
+                                <li>Go development, writing services for windows</li>
+                            </ul>
+                        </p>
+
+                    </div>  
+
+                </div><!-- end col-12 -->
+                
+            </div><!-- end row -->
+
+            <div class="row">
+
+                <div class="col-12">                
+
+                  <a class="d-flex align-items-center font-18 mb-4 p-2 text-primary w-100" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    Skills
+                    <i class="material-icons font-24 ms-auto" aria-hidden="true">expand_more</i>
+                  </a>
+
+                    <div class="collapse px-3" id="collapse3">
+                        <p><span class="text-primary">Primary</span><br /> Windows, Linux, Mac OS, GitLab, CI/CD, Ansible, Terraform, Network, Zabbix, Grafana, Docker, Cloud Hosting Providers, HLK Studio, Driver Signing Windows, Proxmox, VMware ESXi, Bash, Golang...</p>
+                    </div>
+
+                </div><!-- end col-12 -->
+                
+            </div><!-- end row -->
+
+            <div class="row">
+
+                <div class="col-12">                
+
+                    <a class="d-flex align-items-center font-18 mb-4 p-2 text-primary w-100" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                        Location
+                        <i class="material-icons font-24 ms-auto" aria-hidden="true">expand_more</i>
+                    </a>
+
+                    <div class="collapse px-3" id="collapse6">
+                        <p>I am from Ukraine, Dnepr city.</p>
+                    </div>  
+
+                </div><!-- end col-12 -->
+                
+            </div><!-- end row -->
+
+        </div><!-- end cv-accordion -->
+
+        <div class="row">
+            <p class="px-4 pt-2">If you would like a pdf or word doc of my CV, or to discuss an opportunity, please <a href="mailto:ben@benweltman.com?Subject=Website Contact" class="rounded-1 p-1">get in touch</a>.</p>
+        </div>
+
+    </div><!-- end container -->
+
+</main>
+
+<footer class="my-2">
+
+    <div class="container">
+
+        <hr class="w-100 border-primary">
+
+        <div class="row">
+
+            <ul class="nav d-flex align-items-center justify-content-center">
+                <li class="nav-item">
+                    <a href="https://linkedin.com/in/евгений-шевчекно-743090353" class="nav-link rounded-1 text-center w-100" target="_blank">
+                        <i class="font-32 fa fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://github.com/mister5111" class="nav-link rounded-1 text-center w-100" target="_blank">
+                        <i class="font-32 fa fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="d-flex justify-content-center my-2">
+                <a href="mailto:rootroot511@gmail.com?Subject=Website Contact" class="rounded-1 p-2">rootroot511@gmail.com</a>
+            </div>
+
+        </div><!-- end row -->
+
+    </div><!-- end div -->
+
+</footer>
+
+<!-- JS
+=============================================== -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-71259489-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-71259489-1');
+
+    // Dynamic date
+    window.onload= function() {
+        //alert ("onload function");
+        SetYear();
+    }
+
+    // Light & Dark Mode + Colour Changes
+
+    $(document).ready(function () {
+        var light = localStorage.getItem('light');
+
+        if (light === 'True') {
+          localStorage.setItem('light', 'False');
+          modeSwitcher();
+        } else {
+          localStorage.setItem('light', 'True');
+          modeSwitcher();
+        }
+
+        var primary = localStorage.getItem('primary');
+
+        if (primary === null) {
+          $('#primary').val('#5aa1ad');
+          localStorage.setItem('primary', '#5aa1ad');
+          getPrimaryColor();
+        } else {
+          $('#primary').val(primary);
+          $('#prival').val(primary);
+        }    
+
+        // Primary Colour input changes
+        $('#prival').on('change', function () {
+          if ($('#prival').val() == '')
+          {
+            $('#primary').val('#5aa1ad');
+            $('#prival').val('#5aa1ad');
+            localStorage.setItem('primary', '#5aa1ad');
+            getPrimaryColor();
+          } else {
+            $('#primary').val($(this).val());
+            localStorage.setItem('primary', $(this).val());
+            getPrimaryColor();
+          }
+        });
+        $('#primary').on('change', function () {
+          $('#prival').val($(this).val());
+          localStorage.setItem('primary', $(this).val());
+        });
+
+        getPrimaryColor();
+    });
+</script>
+
+<!-- End Document
+================================================== -->
+
+<!-- "Have no fear of perfection – you’ll never reach it" — SALVADOR DALI - From Quotesondesign.com -->
+</body>
+</html>
