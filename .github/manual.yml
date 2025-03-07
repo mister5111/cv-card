@@ -1,0 +1,32 @@
+name: Deploy
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v1
+
+      - name: Create ZIP
+        run: zip -r visit-card ./ -x *.git*
+          
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+
+      - name: Copy project
+        run: scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
+
+      - name: Deploy to server
+        run: |
+          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          sudo -s
+          mkdir /var/www/visit-card
+          apt install unzip -y
+          unzip -o visit-card.zip -d /var/www/visit-card
+          ENDSSH
+          
