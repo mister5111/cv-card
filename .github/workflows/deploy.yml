@@ -13,7 +13,7 @@ jobs:
         # run: zip -r visit-card ./ -x *.git conf*
         run: |
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
-            tar -cvf nginx-conf.tar conf/nginx/visit-cerd
+            tar -cvf nginx-conf.tar ./conf/nginx/visit-cerd
             ls -la
           
       - name: Set up SSH key
