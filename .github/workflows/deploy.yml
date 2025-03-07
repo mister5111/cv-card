@@ -16,6 +16,7 @@ jobs:
             cd conf/nginx && tar -cvf ~/nginx-conf.tar visit-card.conf
             pwd
             ls -la
+            cd ~
           
       - name: Set up SSH key
         run: |
