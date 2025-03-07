@@ -13,10 +13,8 @@ jobs:
         # run: zip -r visit-card ./ -x *.git conf*
         run: |
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
-            cd conf/nginx && tar -cvf ~/nginx-conf.tar visit-card.conf
-            pwd
+            tar -cvf nginx-conf.tar conf/nginx/visit-card.conf
             ls -la
-            cd ~
           
       - name: Set up SSH key
         run: |
@@ -37,6 +35,7 @@ jobs:
           rm /etc/nginx/sites-enabled/default
           rm /etc/nginx/sites-available/default
           tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
-          tar -xvf nginx-conf.tar -C /etc/nginx/sites-available/ --overwrite
-          cp -r /etc/nginx/sites-available/visit-card.conf /etc/nginx/sites-enabled/visit-card.conf
+          tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
+          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
+          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
           ENDSSH
