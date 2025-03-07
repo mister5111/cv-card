@@ -10,7 +10,6 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Create ZIP
-        # run: zip -r visit-card ./ -x *.git conf*
         run: |
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
             tar -cvf nginx-conf.tar conf/nginx/visit-card.conf
