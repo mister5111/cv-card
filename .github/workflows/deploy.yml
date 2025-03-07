@@ -35,4 +35,6 @@ jobs:
           rm /etc/nginx/sites-enabled/default
           rm /etc/nginx/sites-available/default
           tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
+          tar -xvf nginx-conf.tar -C /etc/nginx/sites-available/ --overwrite
+          cp -r /etc/nginx/sites-available/visit-card.conf /etc/nginx/sites-enabled/visit-card.conf
           ENDSSH
