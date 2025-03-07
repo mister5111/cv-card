@@ -15,14 +15,14 @@ jobs:
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
             ls -la
           
-    #   - name: Set up SSH key
-    #     run: |
-    #       mkdir -p ~/.ssh
-    #       echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
-    #       chmod 600 ~/.ssh/deploy
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
 
-    #   - name: Copy project
-    #     run: scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
+      - name: Copy project
+        run: scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
 
     #   - name: Deploy to server
     #     run: |
