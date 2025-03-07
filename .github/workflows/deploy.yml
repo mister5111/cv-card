@@ -24,14 +24,13 @@ jobs:
       - name: Copy project
         run: scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
 
-    #   - name: Deploy to server
-    #     run: |
-    #       ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-    #       sudo -s
-    #       mkdir /var/www/visit-card
-    #       apt install unzip nginx -y
-    #       rm /etc/nginx/sites-enabled/default
-    #       rm /etc/nginx/sites-available/default
-    #       unzip -o visit-card.zip -d /var/www/visit-card
-
-    #       ENDSSH
+      - name: Deploy to server
+        run: |
+          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          sudo -s
+          mkdir /var/www/visit-card
+          apt install nginx -y
+          rm /etc/nginx/sites-enabled/default
+          rm /etc/nginx/sites-available/default
+          tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
+          ENDSSH
