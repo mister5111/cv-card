@@ -295,9 +295,10 @@
                     <script>
                         function loadData() {
                             fetch('create_vm.php')
-                                .then(response => response.text())
+                                .then(response => response.json())
                                 .then(data => {
-                                    document.getElementById('status').innerHTML = data;
+                                    document.getElementById('status').innerHTML =
+                                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
                                 })
                                 .catch(error => console.error('Error:', error));
                         }
