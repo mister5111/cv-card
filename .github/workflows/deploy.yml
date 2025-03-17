@@ -13,7 +13,6 @@ jobs:
         run: |
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
             tar -cvf nginx-conf.tar conf/nginx/visit-card.conf conf/nginx/nginx.conf
-            ls -la
           
       - name: Set up SSH key
         run: |
