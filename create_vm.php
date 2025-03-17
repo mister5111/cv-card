@@ -1,10 +1,9 @@
 <?php
 $config = include('/usr/secure/config.php');
-$password = $config['password'];
+$password = escapeshellarg($config['password']);
 
 header('Content-Type: application/json');
-$output = shell_exec('
-echo $password
-');
-echo json_encode(['output' => $output]);
+
+$output = shell_exec("echo $password");
+echo json_encode(['output' => trim($output)]);
 ?>
