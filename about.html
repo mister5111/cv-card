@@ -291,9 +291,19 @@
                         <i class="material-icons font-24 ms-auto" aria-hidden="true">expand_more</i>
                     </a>
 
-                    <div class="collapse px-3" id="collapse6">
-                        <p>I am from Ukraine, Dnepr city.</p>
-                    </div>  
+                    <script>
+                        function loadData() {
+                            fetch('script.php')
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById('output').innerHTML = data;
+                                })
+                                .catch(error => console.error('Ошибка:', error));
+                        }
+                    </script>
+                        <h1>Данные с PHP-FPM</h1>
+                        <button onclick="loadData()">Загрузить данные</button>
+                        <div id="output"></div>
 
                 </div><!-- end col-12 -->
                 
