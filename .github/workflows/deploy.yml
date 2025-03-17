@@ -12,8 +12,7 @@ jobs:
       - name: Create ZIP
         run: |
             tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
-            tar -cvf site-conf.tar conf/nginx/visit-card.conf
-            tar -cvf nginx-conf.tar conf/nginx/nginx.conf
+            tar -cvf nginx-conf.tar conf/nginx/visit-card.conf conf/nginx/nginx.conf
             ls -la
           
       - name: Set up SSH key
@@ -24,7 +23,7 @@ jobs:
 
       - name: Copy project
         run: | 
-            scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar site-conf.tar nginx-conf.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
+            scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar nginx-conf.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
 
       - name: Deploy to server
         run: |
@@ -36,9 +35,9 @@ jobs:
           rm /etc/nginx/sites-enabled/default
           rm /etc/nginx/sites-available/default
           tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
-          tar -xvf site-conf.tar -C /usr/src/ --overwrite
-          tar -xvf nginx-conf.tar -C /etc/nginx/ --overwrite
+          tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-available/
+          cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
           systemctl restart nginx
           ENDSSH
