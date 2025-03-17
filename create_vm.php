@@ -1,23 +1,39 @@
 <?php
-header('Content-Type: application/json');
+require __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ . '/vendor/autoload.php';  
-$dotenv = Dotenv\Dotenv::createImmutable('/var/www/visit-card/');
+use Dotenv\Dotenv;
+
+// Загружаем переменные окружения из .env
+$dotenv = Dotenv::createImmutable('/var/www/visit-card');
 $dotenv->load();
 
-$password = getenv('PASSWORD'); 
+// Получаем токен из переменных окружения
+$token = getenv('TOKEN');
 
-if (!$password) {
-    echo json_encode(['error' => 'Переменная PASSWORD не найдена']);
-    exit;
+if (!$token) {
+    die(json_encode(['error' => 'TOKEN не найден в .env']));
 }
 
-$output = shell_exec("echo " . escapeshellarg($password));
+// Отправляем запрос в GitHub API
+$payload = json_encode(['ref' => 'main']);
+$ch = curl_init('https://api.github.com/repos/mister5111/Gcloud-VM/actions/workflows/destroy.yml/dispatches');
 
-if (!$output) {
-    echo json_encode(['error' => 'shell_exec() не вернул данных']);
-    exit;
-}
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Accept: application/vnd.github.v3+json',
+    "Authorization: token $token",
+    'User-Agent: PHP-CURL',
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-echo json_encode(['output' => trim($output)]);
+$response = curl_exec($ch);
+$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+echo json_encode([
+    'status' => $http_code,
+    'response' => json_decode($response, true)
+]);
 ?>
