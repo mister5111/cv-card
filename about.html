@@ -295,16 +295,22 @@
                     <script>
                         function loadData() {
                             fetch('create_vm.php')
-                                .then(response => response.text())
+                                .then(response => response.json())
                                 .then(data => {
-                                    document.getElementById('output').innerHTML = data;
+                                    let outputDiv = document.getElementById('output');
+                                    let formattedData = `<strong>IP:</strong> ${data.output.split('\n')[0].split(': ')[1]}<br>` +
+                                                        `<strong>Hostname:</strong> ${data.output.split('\n')[1].split(': ')[1]}<br>` +
+                                                        `<strong>Provider:</strong> ${data.output.split('\n')[2].split(': ')[1]}<br>` +
+                                                        `<strong>Location:</strong> ${data.output.split('\n')[3].split(': ')[1]}`;
+                                    outputDiv.innerHTML = formattedData;
                                 })
                                 .catch(error => console.error('Ошибка:', error));
                         }
                     </script>
                     <div class="collapse px-3" id="collapse7">
-                        <p>Create VM in GCP</p>
-                        <button class="rounded-1 p-1 onclick="loadData()">run</button>
+                        <p>Create VM in Google Cloud Platform</p>
+                        <!-- <button class="btn btn-dark navbar-toggler collapsed loadData()">Start create VM</button> -->
+                        <button class="btn btn-dark" onclick="loadData()">Start create VM</button>
                         <div id="output"></div>
                     </div> 
 
