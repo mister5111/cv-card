@@ -294,17 +294,12 @@
 
                     <script>
                         function loadData() {
-                            fetch('create_vm.php')
-                                .then(response => response.json())
+                            fetch('script.php')
+                                .then(response => response.text())
                                 .then(data => {
-                                    let outputDiv = document.getElementById('output');
-                                    let formattedData = `<strong>IP:</strong> ${data.output.split('\n')[0].split(': ')[1]}<br>` +
-                                                        `<strong>Hostname:</strong> ${data.output.split('\n')[1].split(': ')[1]}<br>` +
-                                                        `<strong>Provider:</strong> ${data.output.split('\n')[2].split(': ')[1]}<br>` +
-                                                        `<strong>Location:</strong> ${data.output.split('\n')[3].split(': ')[1]}`;
-                                    outputDiv.innerHTML = formattedData;
+                                    document.getElementById('output').innerHTML = data;
                                 })
-                                .catch(error => console.error('Ошибка:', error));
+                                .catch(error => console.error('Error:', error));
                         }
                     </script>
                     <div class="collapse px-3" id="collapse7">
