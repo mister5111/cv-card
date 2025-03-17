@@ -1,7 +1,10 @@
 <?php
+$config = include('/usr/secure/config.php');
+$password = $config['password'];
+
 header('Content-Type: application/json');
 $output = shell_exec('
-curl -p 2ip.ua
+echo $password
 ');
 echo json_encode(['output' => $output]);
 ?>
