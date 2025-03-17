@@ -7,8 +7,12 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable('/var/www/visit-card');
 $dotenv->load();
 
+
+var_dump($_ENV);
+var_dump(getenv('TOKEN'));
+var_dump($_SERVER['TOKEN']);
 // Получаем токен из переменных окружения
-$token = getenv('TOKEN');
+$token = $_ENV['TOKEN'] ?? null;
 
 if (!$token) {
     die(json_encode(['error' => 'TOKEN не найден в .env']));
