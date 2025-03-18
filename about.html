@@ -297,7 +297,7 @@
                             fetch('create_vm.php')
                                 .then(response => response.json())
                                 .then(data => {
-                                    document.getElementById('status').innerHTML =
+                                    document.getElementById('output').innerHTML =
                                     `<pre>${JSON.stringify(data, null, 2)}</pre>`;
                                 })
                                 .catch(error => console.error('Error:', error));
@@ -307,7 +307,7 @@
                         <p>Create VM in Google Cloud Platform</p>
                         <!-- <button class="btn btn-dark navbar-toggler collapsed loadData()">Start create VM</button> -->
                         <button class="btn btn-dark" onclick="loadData()">Start create VM</button>
-                        <div id="status"></div>
+                        <div id="output"></div>
                     </div> 
 
                 </div><!-- end col-12 -->
