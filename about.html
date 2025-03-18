@@ -298,7 +298,7 @@
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML += `<p>${data.status}</p>`;
+                                document.getElementById('output').innerHTML = `<p><strong>Now is Status:</strong> ${data.status}</p>`;
                     
                                 if (data.status === "completed") {
                                     eventSource.close();
@@ -311,6 +311,7 @@
                             };
                         }
                     </script>
+                    
                     
                     <div class="collapse px-3" id="collapse7">
                         <p>Create VM in Google Cloud Platform</p>
