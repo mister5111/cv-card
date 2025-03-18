@@ -4,7 +4,6 @@ header('Cache-Control: no-cache');
 header('Connection: keep-alive');
 
 function sendStatus($status) {
-    error_log("Отправка статуса: " . $status);
     echo "data: " . json_encode(["status" => $status]) . "\n\n";
     ob_flush();
     flush();
@@ -20,6 +19,8 @@ if ($process) {
             sendStatus(trim($line));
         }
     }
+    sendStatus("Таймер завершен, продолжаем...");
+    error_log("Таймер завершен, продолжаем выполнение скрипта.");
     pclose($process);
 }
 
