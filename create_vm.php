@@ -9,11 +9,6 @@ function sendStatus($status) {
     flush();
 }
 
-sendStatus("queued");
-sleep(2);
-
-sendStatus("in_progress");
-sleep(10);
 
 $command = "/var/www/visit-card/run";
 $process = popen($command, 'r');
@@ -28,5 +23,4 @@ if ($process) {
     pclose($process);
 }
 
-sendStatus("completed");
 ?>
