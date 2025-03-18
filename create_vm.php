@@ -4,6 +4,7 @@ header('Cache-Control: no-cache');
 header('Connection: keep-alive');
 
 function sendStatus($status) {
+    error_log("Отправка статуса: " . $status);
     echo "data: " . json_encode(["status" => $status]) . "\n\n";
     ob_flush();
     flush();
