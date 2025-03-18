@@ -300,9 +300,9 @@
                                 const data = JSON.parse(event.data);
                                 document.getElementById('output').innerHTML = `<p><strong>Now is Status:</strong> ${data.status}</p>`;
                     
-                                if (data.status === "completed") {
-                                    eventSource.close();
-                                }
+                                // if (data.status === "completed") {
+                                //     eventSource.close();
+                                // }
                             };
                     
                             eventSource.onerror = function () {
