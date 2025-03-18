@@ -23,7 +23,7 @@ if ($process) {
         usleep(50000); 
     }
 
-    sendStatus("Скрипт завершен!");
+    sendStatus("Destroy complete!");
     flush();
 
     pclose($process);
