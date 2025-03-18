@@ -295,8 +295,9 @@
                     <script>
                         function loadData() {
                             const button = document.querySelector('.btn');
-                            button.disabled = true; 
+                            button.disabled = true;
                             button.innerText = "Creating...";
+                            localStorage.setItem("vmStatus", "creating"); // Сохраняем статус в localStorage
                     
                             const eventSource = new EventSource('create_vm.php');
                     
@@ -306,8 +307,9 @@
                     
                                 if (data.status === "completed") {
                                     eventSource.close();
-                                    button.disabled = false; 
-                                    button.innerText = "Start create VM"; 
+                                    button.disabled = false;
+                                    button.innerText = "Start create VM";
+                                    localStorage.setItem("vmStatus", "idle"); // Обновляем статус
                                 }
                             };
                     
@@ -316,8 +318,23 @@
                                 eventSource.close();
                                 button.disabled = false;
                                 button.innerText = "Start create VM";
+                                localStorage.setItem("vmStatus", "idle");
                             };
                         }
+                    
+                        // Восстанавливаем состояние кнопки при загрузке страницы
+                        window.onload = function () {
+                            const button = document.querySelector('.btn');
+                            const status = localStorage.getItem("vmStatus");
+                    
+                            if (status === "creating") {
+                                button.disabled = true;
+                                button.innerText = "Creating...";
+                            } else {
+                                button.disabled = false;
+                                button.innerText = "Start create VM";
+                            }
+                        };
                     </script>
                     <div class="collapse px-3" id="collapse7">
                         <p>Create VM in Google Cloud Platform</p>
