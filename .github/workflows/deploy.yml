@@ -40,3 +40,12 @@ jobs:
           cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
           systemctl restart nginx
           ENDSSH
+
+      - name: Create Secret
+        run: |
+            ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+            sudo -s
+            echo ${{ secrets.TOKEN }} > /root/.token
+            chmod 600 /root/.token
+            chown root:root /root/.token
+            ENDSSH
