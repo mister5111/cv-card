@@ -294,13 +294,21 @@
 
                     <script>
                         function loadData() {
-                            fetch('create_vm.php')
-                                .then(response => response.json())
-                                .then(data => {
-                                    document.getElementById('output').innerHTML =
-                                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-                                })
-                                .catch(error => console.error('Error:', error));
+                            const eventSource = new EventSource('create_vm.php');
+                    
+                            eventSource.onmessage = function (event) {
+                                const data = JSON.parse(event.data);
+                                document.getElementById('output').innerHTML += `<p>${data.status}</p>`;
+                    
+                                if (data.status === "completed") {
+                                    eventSource.close();
+                                }
+                            };
+                    
+                            eventSource.onerror = function () {
+                                console.error("Error receiving updates");
+                                eventSource.close();
+                            };
                         }
                     </script>
                     <div class="collapse px-3" id="collapse7">
