@@ -298,7 +298,7 @@
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML = `<p><strong>  Status:</strong> ${data.status}</p>`;
+                                document.getElementById('output').innerHTML = `<p>${data.status}</p>`;
                             };
                     
                             eventSource.onerror = function () {
