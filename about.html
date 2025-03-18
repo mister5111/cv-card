@@ -294,20 +294,28 @@
 
                     <script>
                         function loadData() {
+                            const button = document.querySelector('.btn');
+                            button.disabled = true; 
+                            button.innerText = "Creating...";
+                    
                             const eventSource = new EventSource('create_vm.php');
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML += `<p>${data.status}</p>`;
+                                document.getElementById('output').innerHTML = `<p><strong>Now is Status:</strong> ${data.status}</p>`;
                     
                                 if (data.status === "completed") {
                                     eventSource.close();
+                                    button.disabled = false; 
+                                    button.innerText = "Start create VM"; 
                                 }
                             };
                     
                             eventSource.onerror = function () {
                                 console.error("Error receiving updates");
                                 eventSource.close();
+                                button.disabled = false;
+                                button.innerText = "Start create VM";
                             };
                         }
                     </script>
