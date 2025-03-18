@@ -298,11 +298,7 @@
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML = `<p><strong>Now is Status:</strong> ${data.status}</p>`;
-                    
-                                // if (data.status === "completed") {
-                                //     eventSource.close();
-                                // }
+                                document.getElementById('output').innerHTML = `<p><strong>  Status:</strong> ${data.status}</p>`;
                             };
                     
                             eventSource.onerror = function () {
