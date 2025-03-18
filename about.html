@@ -294,11 +294,6 @@
 
                     <script>
                         function loadData() {
-                            const button = document.querySelector('.btn');
-                            button.disabled = true;
-                            button.innerText = "Creating...";
-                            localStorage.setItem("vmStatus", "creating"); // Сохраняем статус в localStorage
-                    
                             const eventSource = new EventSource('create_vm.php');
                     
                             eventSource.onmessage = function (event) {
@@ -307,58 +302,15 @@
                     
                                 if (data.status === "completed") {
                                     eventSource.close();
-                                    button.disabled = false;
-                                    button.innerText = "Start create VM";
-                                    localStorage.setItem("vmStatus", "idle"); // Обновляем статус
                                 }
                             };
                     
                             eventSource.onerror = function () {
                                 console.error("Error receiving updates");
                                 eventSource.close();
-                                button.disabled = false;
-                                button.innerText = "Start create VM";
-                                localStorage.setItem("vmStatus", "idle");
                             };
                         }
-                    
-                        // ✅ Восстанавливаем статус кнопки при загрузке страницы
-                        window.onload = function () {
-                            const button = document.querySelector('.btn');
-                            const savedStatus = localStorage.getItem("vmStatus");
-                    
-                            if (savedStatus === "creating") {
-                                button.disabled = true;
-                                button.innerText = "Creating...";
-                    
-                                // 🟢 Автоматически запрашиваем статус, если процесс не завершен
-                                const eventSource = new EventSource('create_vm.php');
-                                eventSource.onmessage = function (event) {
-                                    const data = JSON.parse(event.data);
-                                    document.getElementById('output').innerHTML = `<p><strong>Now is Status:</strong> ${data.status}</p>`;
-                    
-                                    if (data.status === "completed") {
-                                        eventSource.close();
-                                        button.disabled = false;
-                                        button.innerText = "Start create VM";
-                                        localStorage.setItem("vmStatus", "idle");
-                                    }
-                                };
-                    
-                                eventSource.onerror = function () {
-                                    console.error("Error receiving updates");
-                                    eventSource.close();
-                                    button.disabled = false;
-                                    button.innerText = "Start create VM";
-                                    localStorage.setItem("vmStatus", "idle");
-                                };
-                            } else {
-                                button.disabled = false;
-                                button.innerText = "Start create VM";
-                            }
-                        };
                     </script>
-                    
                     <div class="collapse px-3" id="collapse7">
                         <p>Create VM in Google Cloud Platform</p>
                         <!-- <button class="btn btn-dark navbar-toggler collapsed loadData()">Start create VM</button> -->
