@@ -17,10 +17,15 @@ if ($process) {
         $line = fgets($process);
         if ($line) {
             sendStatus(trim($line));
+            ob_flush();
+            flush(); 
         }
+        usleep(50000); 
     }
-    sendStatus("Таймер завершен, продолжаем...");
-    error_log("Таймер завершен, продолжаем выполнение скрипта.");
+
+    sendStatus("Скрипт завершен!");
+    flush();
+
     pclose($process);
 }
 
