@@ -13,21 +13,13 @@ function sendStatus($status) {
     flush();
 }
 
-// Если скрипт уже запущен, просто отдаем текущий статус
+// Если статус не "completed", отправляем текущий статус
 if (file_exists($statusFile)) {
     $currentStatus = trim(file_get_contents($statusFile));
     if ($currentStatus !== "completed") {
         sendStatus($currentStatus);
-        exit;
     }
 }
-
-// Начало выполнения
-sendStatus("queued");
-sleep(2);
-
-sendStatus("in_progress");
-sleep(10); // Симуляция выполнения
 
 // Запускаем Bash-скрипт
 $command = "/var/www/visit-card/run";
@@ -43,8 +35,5 @@ if ($process) {
     pclose($process);
 }
 
-// Завершение работы
-sendStatus("completed");
 unlink($statusFile); // Удаляем файл статуса
 ?>
-
