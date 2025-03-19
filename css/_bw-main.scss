@@ -347,3 +347,14 @@ html[data-bs-theme='light'] {
 		padding-left: 1rem;
 	}
 }
+
+
+.console {
+    background-color: black;
+    color: #00ff00; 
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    height: 200px;
+    overflow-y: auto;
+}
