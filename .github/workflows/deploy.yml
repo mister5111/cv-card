@@ -45,9 +45,6 @@ jobs:
       - name: Create Secret
         run: |
           ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-          sudo -s
-          mkdir /usr/secure
-          cd /usr/secure/
-          ls -la
-          echo "${{ secrets.TOKEN }}" > /usr/secure/.token
+          sudo mkdir -p /usr/secure
+          echo "${{ secrets.TOKEN }}" | sudo tee /usr/secure/.token > /dev/null
           ENDSSH
