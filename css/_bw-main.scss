@@ -350,11 +350,12 @@ html[data-bs-theme='light'] {
 
 
 .console {
-    background-color: black;
-    color: #00ff00; 
+    background-color: #222;
+    color: #0f0;
     padding: 10px;
-    border-radius: 5px;
     font-family: monospace;
+    white-space: pre-wrap;
     height: 200px;
     overflow-y: auto;
+    border: 1px solid #555;
 }
