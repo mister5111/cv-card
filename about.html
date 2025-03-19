@@ -34,16 +34,6 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/bw-main.js"></script>
 
-<!-- Dynamic Date - Year - for Copyright (JS)
-================================================= -->
-<script> 
-    function SetYear() {
-        var thisDate=new Date();
-        var thisYear=thisDate.getFullYear();
-        document.getElementById('copyDate').innerHTML="&copy; "+thisYear;
-    }
-</script>
-
 </head>
 <body class="bg-dark about">
 
@@ -311,8 +301,7 @@
                     
                     <div class="collapse px-3" id="collapse7">
                         <p>Create VM in Google Cloud Platform</p>
-                        <!-- <button class="btn btn-dark navbar-toggler collapsed loadData()">Start create VM</button> -->
-                        <button class="btn btn-dark" onclick="loadData()">Start create VM</button>
+                        <button class="btn" onclick="loadData()">Start create VM</button>
                         <div id="output"></div>
                     </div> 
 
