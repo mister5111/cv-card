@@ -350,12 +350,13 @@ html[data-bs-theme='light'] {
 
 
 .console {
-    background-color: #222;
-    color: #0f0;
+    background-color: #121212; /* Тёмный фон */
+    color: #00ff00; /* Зелёный текст, как в терминале */
+    font-family: monospace; /* Моноширинный шрифт */
     padding: 10px;
-    font-family: monospace;
-    white-space: pre-wrap;
+    border-radius: 5px;
     height: 200px;
-    overflow-y: auto;
-    border: 1px solid #555;
+    overflow-y: auto; /* Добавляем прокрутку */
+    border: 1px solid #333;
+    white-space: pre-wrap; /* Сохранение переносов строк */
 }

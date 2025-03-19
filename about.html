@@ -284,13 +284,17 @@
 
                     <script>
                         function loadData() {
+                            const output = document.getElementById('output');
+                            output.innerHTML = ""; // Очищаем перед запуском
+
                             const eventSource = new EventSource('create_vm.php');
-                    
+
                             eventSource.onmessage = function (event) {
-                                const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML = `<p><strong></strong> ${data.status}</p>`;
+                                    const data = JSON.parse(event.data);
+                                    output.innerHTML += data.status + "\n"; // Добавляем новую строку
+                                    output.scrollTop = output.scrollHeight; // Автопрокрутка вниз
                             };
-                    
+
                             eventSource.onerror = function () {
                                 console.error("Error receiving updates");
                                 eventSource.close();
@@ -303,7 +307,8 @@
                         <p>Create VM in Google Cloud Platform</p>
                         <button class="btn nav-link" onclick="loadData()">Start create VM</button>
                         <div id="output" class="console"></div>
-                    </div> 
+                    </div>
+                    
 
                 </div><!-- end col-12 -->
                 
