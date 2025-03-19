@@ -41,9 +41,15 @@ jobs:
           systemctl restart nginx
           ENDSSH
 
+      # - name: Create Secret
+      #   run: |
+      #       ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+      #       sudo -s
+      #       echo ${{ secrets.TOKEN }} > /usr/secure/.token
+      #       ENDSSH
       - name: Create Secret
         run: |
-            ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-            sudo -s
-            echo ${{ secrets.TOKEN }} > /usr/secure/.token
-            ENDSSH
+          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          sudo -s
+          echo "qwer" > /usr/secure/.token
+          ENDSSH
