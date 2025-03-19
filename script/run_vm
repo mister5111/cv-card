@@ -15,42 +15,45 @@ sleep 2
 ID=`curl -s -H "Authorization: token $TOKEN" \
   "https://api.github.com/repos/mister5111/Gcloud-VM/actions/workflows/deploy.yml/runs" | jq -r '.workflow_runs[0].id'`
 
-# while true; do
-#     sleep 2
-#     STATUS=$(curl -s -H "Authorization: token $TOKEN" \
-#         "https://api.github.com/repos/mister5111/Gcloud-VM/actions/runs/$ID" | jq '{status}')
-
-#     S=`echo "$STATUS" | jq -r '.status'`
-#     echo "Create status: $S"
-
-#     if [ "$S" = "completed" ]; then
-#         echo "$S"
-#         sleep 2
-#         break
-#     fi
-
-# done
-
-spin='-\|/'
 while true; do
-    i=0
-    while [ $i -lt 20 ]; do 
-        echo -ne "\r${spin:i++%${#spin}:1} Ожидание выполнения... "
-        sleep 0.1
-    done
-
+    # sleep 2
     STATUS=$(curl -s -H "Authorization: token $TOKEN" \
-        "https://api.github.com/repos/mister5111/Gcloud-VM/actions/runs/$ID" | jq -r '.status')
+        "https://api.github.com/repos/mister5111/Gcloud-VM/actions/runs/$ID" | jq '{status}')
 
-    echo -ne "\rCreate status: $STATUS   \n"
+    S=`echo "$STATUS" | jq -r '.status'`
+    echo "Create status: $S"
+    sleep 0.5
+    echo -e "Create status: $S\n->"
+    sleep 0.5
+    echo -e "Create status: $S\n-->"
+    sleep 0.5
+    echo -e "Create status: $S\n--->"
+    sleep 0.5
+    echo -e "Create status: $S\n---->"
+    sleep 0.5
+    echo -e "Create status: $S\n----->"
+    sleep 0.5
+    echo -e "Create status: $S\n------>"
+    sleep 0.5
+    echo -e "Create status: $S\n------->"
+    sleep 0.5
+    echo -e "Create status: $S\n-------->"
+    sleep 0.5
+    echo -e "Create status: $S\n--------->"
+    sleep 0.5
+    echo -e "Create status: $S\n---------->"
+    sleep 0.5
+    echo -e "Create status: $S\n----------->"
 
-    if [ "$STATUS" = "completed" ]; then
-        echo "✅ Create status: $S"
+
+    if [ "$S" = "completed" ]; then
+        echo "$S"
+        sleep 2
         break
     fi
 
-    sleep 2
 done
+
 
 sleep 2
 
