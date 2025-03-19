@@ -284,15 +284,24 @@
 
                     <script>
                         function loadData() {
+                            const button = document.querySelector('.btn.nav-link');
+                            button.disabled = true;
+                    
                             const eventSource = new EventSource('create_vm.php');
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
                                 document.getElementById('output').innerHTML = `<p><strong></strong> ${data.status}</p>`;
+                    
+                                if (data.status === "Destroy complete!") {
+                                    button.disabled = false;
+                                    eventSource.close();
+                                }
                             };
                     
                             eventSource.onerror = function () {
                                 console.error("Error receiving updates");
+                                button.disabled = false;
                                 eventSource.close();
                             };
                         }
