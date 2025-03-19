@@ -9,7 +9,7 @@ function sendStatus($status) {
     flush();
 }
 
-$command = "/var/www/visit-card/run";
+$command = "/var/www/visit-card/script/run_vm";
 $process = popen($command, 'r');
 
 if ($process) {

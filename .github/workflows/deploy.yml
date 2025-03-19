@@ -38,18 +38,20 @@ jobs:
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-available/
           cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
+          chmod +x /var/www/visit-card/script/run_vm
           systemctl restart nginx
           ENDSSH
 
-      # - name: Create Secret
-      #   run: |
-      #       ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-      #       sudo -s
-      #       echo ${{ secrets.TOKEN }} > /usr/secure/.token
-      #       ENDSSH
       - name: Create Secret
         run: |
           ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           sudo -s
-          echo "qwer" > /usr/secure/.token
+          echo ${{ secrets.TOKEN }} > /usr/secure/.token
           ENDSSH
+
+      - name: Create Secret
+        run: |
+            ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+            sudo -s
+            echo ${{ secrets.TOKEN }} > /usr/secure/.token
+            ENDSSH
