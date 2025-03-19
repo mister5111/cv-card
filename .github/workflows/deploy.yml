@@ -46,5 +46,6 @@ jobs:
         run: |
           ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           sudo -s
+          mkdir /usr/secure
           echo "${{ secrets.TOKEN }}" > /usr/secure/.token
           ENDSSH
