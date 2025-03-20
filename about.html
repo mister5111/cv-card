@@ -294,7 +294,7 @@
                                 return;
                             }
                     
-                            const eventSource = new EventSource(`create_vm.php?vmName=${encodeURIComponent(var1)}`);
+                            const eventSource = new EventSource(`create_vm.php?var1=${encodeURIComponent(var1)}`);
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
