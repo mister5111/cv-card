@@ -9,7 +9,7 @@ function sendStatus($status) {
     flush();
 }
 
-$var1 = isset($_GET['var1']) ? escapeshellarg($_GET["var1"]) : '';
+$var1 = isset($_GET["var1"]) ? escapeshellarg($_GET["var1"]) : '';
 if (!$var1) {
     sendStatus("Error: VM name is required!");
     exit;
