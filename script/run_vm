@@ -21,29 +21,29 @@ while true; do
         "https://api.github.com/repos/mister5111/Gcloud-VM/actions/runs/$ID" | jq '{status}')
 
     S=`echo "$STATUS" | jq -r '.status'`
-    echo "Create status: $S >"
+    echo "Create status: $S ◐"
     sleep 0.5
-    echo -e "Create status: $S ->"
+    echo "Create status: $S ◓"
     sleep 0.5
-    echo -e "Create status: $S -->"
+    echo "Create status: $S ◑"
     sleep 0.5
-    echo -e "Create status: $S --->"
+    echo "Create status: $S ◒"
     sleep 0.5
-    echo -e "Create status: $S ---->"
-    sleep 0.5
-    echo -e "Create status: $S ----->"
-    sleep 0.5
-    echo -e "Create status: $S ------>"
-    sleep 0.5
-    echo -e "Create status: $S ------->"
-    sleep 0.5
-    echo -e "Create status: $S -------->"
-    sleep 0.5
-    echo -e "Create status: $S --------->"
-    sleep 0.5
-    echo -e "Create status: $S ---------->"
-    sleep 0.5
-    echo -e "Create status: $S ----------->"
+    # echo -e "Create status: $S ---->"
+    # sleep 0.5
+    # echo -e "Create status: $S ----->"
+    # sleep 0.5
+    # echo -e "Create status: $S ------>"
+    # sleep 0.5
+    # echo -e "Create status: $S ------->"
+    # sleep 0.5
+    # echo -e "Create status: $S -------->"
+    # sleep 0.5
+    # echo -e "Create status: $S --------->"
+    # sleep 0.5
+    # echo -e "Create status: $S ---------->"
+    # sleep 0.5
+    # echo -e "Create status: $S ----------->"
 
 
     if [ "$S" = "completed" ]; then
