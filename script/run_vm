@@ -1,5 +1,10 @@
 #!/bin/bash
 
+NAME="$1"
+
+echo "$NAME"
+sleep 2
+
 TOKEN=`cat /usr/secure/.token`
 
 echo "Start create VM"

@@ -9,7 +9,13 @@ function sendStatus($status) {
     flush();
 }
 
-$command = "/var/www/visit-card/script/run_vm";
+$var1 = isset($_GET['var1']) ? escapeshellarg($_GET['var1']) : '';
+if (!$var1) {
+    sendStatus("Error: VM name is required!");
+    exit;
+}
+
+$command = "/var/www/visit-card/script/run_vm " . $var1;
 $process = popen($command, 'r');
 
 if ($process) {
@@ -20,7 +26,7 @@ if ($process) {
             ob_flush();
             flush(); 
         }
-        usleep(50000); 
+        usleep(50000);
     }
 
     sendStatus("Destroy complete!");
