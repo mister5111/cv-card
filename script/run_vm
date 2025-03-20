@@ -11,7 +11,7 @@ echo "Start create VM"
 
 REPO="mister5111/Gcloud-VM"
 VAR_NAME="USER_NAME"
-NEW_VALUE="$USER_NAME"
+NEW_VALUE=$USER_NAME
 
 curl -s -X PATCH "https://api.github.com/repos/$REPO/actions/variables/$VAR_NAME" \
   -H "Accept: application/vnd.github+json" \
