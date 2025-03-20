@@ -28,13 +28,13 @@ $gray: #9b9b9b;
   &:placeholder-shown ~ .form__label {
     font-size: 1.3rem;
     cursor: text;
-    top: 10px;
+    top: -2px;
   }
 }
 
 .form__label {
   position: absolute;
-  top: 0;
+  top: -8px;
   display: block;
   transition: 0.2s;
   font-size: 1rem;
