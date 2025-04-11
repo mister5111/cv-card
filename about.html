@@ -326,7 +326,7 @@
                                 return;
                             }
                     
-                            const eventSource = new EventSource(`create_vm.php?var1b=${encodeURIComponent(var1b)}`);
+                            const eventSource = new EventSource(`create_vm_in_docker.php?var1b=${encodeURIComponent(var1b)}`);
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
