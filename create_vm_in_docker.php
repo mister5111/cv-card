@@ -9,13 +9,13 @@ function sendStatus($status) {
     flush();
 }
 
-$var1 = isset($_GET["var1a"]) ? escapeshellarg($_GET["var1a"]) : '';
+$var1 = isset($_GET["var1b"]) ? escapeshellarg($_GET["var1b"]) : '';
 if (!$var1) {
     sendStatus("Error: VM name is required!");
     exit;
 }
 
-$command = "/var/www/visit-card/script/run_vm " . $var1;
+$command = "/var/www/visit-card/script/run_vm_docker " . $var1;
 $process = popen($command, 'r');
 
 if ($process) {

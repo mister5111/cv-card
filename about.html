@@ -287,18 +287,18 @@
                             const button = document.querySelector('.btn.nav-link');
                             button.disabled = true;
                     
-                            const var1 = document.getElementById('var1').value;
+                            const var1 = document.getElementById('var1a').value;
                             if (!var1) {
-                                alert("Please enter a VM name!");
+                                alert("Please enter name!");
                                 button.disabled = false;
                                 return;
                             }
                     
-                            const eventSource = new EventSource(`create_vm.php?var1=${encodeURIComponent(var1)}`);
+                            const eventSource = new EventSource(`create_vm.php?var1a=${encodeURIComponent(var1a)}`);
                     
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('output').innerHTML = `<p><strong></strong> ${data.status}</p>`;
+                                document.getElementById('outputA').innerHTML = `<p><strong></strong> ${data.status}</p>`;
                     
                                 if (data.status === "Destroy complete!") {
                                     button.disabled = false;
@@ -314,16 +314,58 @@
                         }
                     </script>
                     
+                    <script>
+                        function loadData() {
+                            const button = document.querySelector('.btn.nav-link');
+                            button.disabled = true;
                     
+                            const var1 = document.getElementById('var1b').value;
+                            if (!var1) {
+                                alert("Please enter name!");
+                                button.disabled = false;
+                                return;
+                            }
+                    
+                            const eventSource = new EventSource(`create_vm.php?var1b=${encodeURIComponent(var1b)}`);
+                    
+                            eventSource.onmessage = function (event) {
+                                const data = JSON.parse(event.data);
+                                document.getElementById('outputB').innerHTML = `<p><strong></strong> ${data.status}</p>`;
+                    
+                                if (data.status === "Destroy complete!") {
+                                    button.disabled = false;
+                                    eventSource.close();
+                                }
+                            };
+                    
+                            eventSource.onerror = function () {
+                                console.error("Error receiving updates");
+                                button.disabled = false;
+                                eventSource.close();
+                            };
+                        }
+                    </script>
+                    <div class="d-flex gap-3">
                     <div class="collapse" id="collapse7">
                         <p>Create VM in Google Cloud Platform</p>
                         <div class="form__group field">
-                            <input autocomplete="off" type="input" class="form__field" placeholder="Write your name" name="name" id="var1" required />
+                            <input autocomplete="off" type="input" class="form__field" placeholder="Write your name" name="name" id="var1a" required />
                             <label for="name" class="form__label">Write your name</label>
                         </div>
                         <button class="btn nav-link" onclick="loadData()">Start create VM</button>
-                        <div id="output"></div>
+                        <div id="outputA"></div>
                     </div> 
+                    
+                    <div class="collapse" id="collapse7">
+                        <p>Up my api-service in Docker</p>
+                        <!-- <div class="form__group field">
+                            <input autocomplete="off" type="input" class="form__field" placeholder="Write your name" name="name" id="var1b" required />
+                            <label for="name" class="form__label">Write your name</label>
+                        </div> -->
+                        <button class="btn nav-link" onclick="loadData()">Build Go-application and Deploy</button>
+                        <div id="outputB"></div>
+                    </div>
+                    </div>
 
                 </div><!-- end col-12 -->
                 
