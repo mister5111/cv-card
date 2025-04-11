@@ -316,28 +316,20 @@
                     
                     <script>
                         function loadDataB(button) {
-                            // const button = document.querySelector('.btn.nav-link');
                             button.disabled = true;
-                    
-                            const var1b = document.getElementById('var1b').value;
-                            if (!var1b) {
-                                alert("Please enter name!");
-                                button.disabled = false;
-                                return;
-                            }
-                    
-                            const eventSource = new EventSource(`create_vm_in_docker.php?var1b=${encodeURIComponent(var1b)}`);
-                    
+
+                            const eventSource = new EventSource(`create_vm_in_docker.php`);
+
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('outputB').innerHTML = `<p><strong></strong> ${data.status}</p>`;
-                    
+                                document.getElementById('outputB').innerHTML = `<p>${data.status}</p>`;
+
                                 if (data.status === "Destroy complete!") {
                                     button.disabled = false;
                                     eventSource.close();
                                 }
                             };
-                    
+
                             eventSource.onerror = function () {
                                 console.error("Error receiving updates");
                                 button.disabled = false;
@@ -360,11 +352,11 @@
                     
                         <div>
                             <p>Up my api-service in Docker</p>
-                        <div class="form__group field">
-                            <input autocomplete="off" type="input" class="form__field" placeholder="Write your name" name="name" id="var1b" required />
+                            <div class="form__group field">
+                                <input autocomplete="off" type="input" class="form__field" placeholder="Write your name" name="name" id="var1b" required />
                             <!-- <label for="name" class="form__label">Write your name</label> -->
-                        </div>
-                        <button class="btn nav-link" onclick="loadDataB(this)">Build Go-application and Deploy</button>
+                            </div>
+                            <button class="btn nav-link" onclick="loadDataB(this)">Build Go-application and Deploy</button>
                             <div id="outputB"></div>
                         </div>
 
