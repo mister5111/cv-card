@@ -39,6 +39,7 @@ jobs:
           cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-available/
           cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
           chmod +x /var/www/visit-card/script/run_vm
+          chmod +x /var/www/visit-card/script/run_vm_docker
           systemctl restart nginx
           ENDSSH
 
