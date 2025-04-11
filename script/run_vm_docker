@@ -52,7 +52,8 @@ TIMER=300
 while [ $TIMER -gt 0 ]; do
     MIN=$((TIMER / 60))
     SEC=$((TIMER % 60))
-    echo "http://"$IP" Remaining Time: $MIN min $SEC sec"
+    echo "Remaining Time: $MIN min $SEC sec"
+    echo ""$IP""
     sleep 1
     ((TIMER--))
 done
