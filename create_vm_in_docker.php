@@ -21,7 +21,7 @@ if ($process) {
             } elseif (strpos($line, 'status=false') !== false) {
                 sendStatus("✅ Status OFF");
             } else {
-                sendStatus($line);
+                sendStatus(trim($line));
             }
 
             sendStatus(trim($line));
