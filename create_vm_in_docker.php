@@ -16,14 +16,6 @@ if ($process) {
     while (!feof($process)) {
         $line = fgets($process);
         if ($line) {
-            if (strpos($line, 'status=true') !== false) {
-                sendStatus("✅ Status ON");
-            } elseif (strpos($line, 'status=false') !== false) {
-                sendStatus("✅ Status OFF");
-            } else {
-                sendStatus(trim($line));
-            }
-
             sendStatus(trim($line));
             ob_flush();
             flush(); 
