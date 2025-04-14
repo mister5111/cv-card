@@ -319,7 +319,7 @@
                             const output = document.getElementById("outputB");
                             output.innerHTML = "";
                         
-                            const eventSource = new EventSource("/path/to/your/script.php");
+                            const eventSource = new EventSource("create_vm_in_docker.php");
                         
                             eventSource.onmessage = function(event) {
                                 const data = JSON.parse(event.data);
