@@ -16,10 +16,7 @@ if ($process) {
     while (!feof($process)) {
         $line = fgets($process);
         if ($line) {
-            $line = fgets($process);
-            if ($line !== false) {
-                sendStatus(trim($line));
-            }
+            sendStatus(trim($line));
             ob_flush();
             flush(); 
         }
