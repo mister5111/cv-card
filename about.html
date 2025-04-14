@@ -323,6 +323,7 @@
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
                                 document.getElementById('outputB').innerHTML = `<p>${data.status}</p>`;
+                                document.getElementById('outputC').innerHTML = `<p>Test</p>`;
 
                                 if (data.status === "Destroy complete!") {
                                     button.disabled = false;
@@ -354,6 +355,8 @@
                             <p>Create my api-service in Docker</p>
                             <button class="btn nav-link" onclick="loadDataB(this)">Build Go-application and Deploy</button>
                             <div id="outputB"></div>
+                            <div id="outputC"></div>
+                            
                         </div>
 
                     </div>
