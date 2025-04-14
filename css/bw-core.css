@@ -12517,11 +12517,12 @@ html[data-bs-theme=light] .black-primary .nav-link.active:hover {
   padding: 10px 0 0;
   margin-top: 10px;
   width: 50%;
+  min-width: 120px;
 }
 
 .form__field {
   font-family: inherit;
-  width: 40%;
+  width: 68%;
   border: 0;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
@@ -12538,12 +12539,12 @@ html[data-bs-theme=light] .black-primary .nav-link.active:hover {
   color: transparent;
 }
 .form__field:-moz-placeholder-shown ~ .form__label {
-  font-size: 1.3rem;
+  font-size: 1rem;
   cursor: text;
   top: -2px;
 }
 .form__field:placeholder-shown ~ .form__label {
-  font-size: 1.3rem;
+  font-size: 1rem;
   cursor: text;
   top: -2px;
 }
