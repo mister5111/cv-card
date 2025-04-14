@@ -323,7 +323,7 @@
                             eventSource.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
                                 document.getElementById('outputB').innerHTML = `<p>${data.status}</p>`;
-                                document.getElementById('outputC').innerHTML = `<label for="name" class="form__label">It will take about 10 minutes.</label>`;
+                                document.getElementById('outputC').innerHTML = `<p class="text-primary ms-auto"><b>2021-Now</b></p>`;
 
                                 if (data.status === "Destroy complete!") {
                                     button.disabled = false;
