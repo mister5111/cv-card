@@ -51,7 +51,9 @@ TIMER=300
 while [ $TIMER -gt 0 ]; do
     MIN=$((TIMER / 60))
     SEC=$((TIMER % 60))
-    echo "You need to perform a GET request to $IP to get instructions Remaining Time: $MIN min $SEC sec"
+    # echo "You need to perform a GET request to $IP to get instructions Remaining Time: $MIN min $SEC sec"
+    echo "You need to perform a GET request to to get instructions Remaining Time: $MIN min $SEC sec"
+
     sleep 1
     ((TIMER--))
 done
