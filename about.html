@@ -316,27 +316,40 @@
                     
                     <script>
                         function loadDataB(button) {
-                            button.disabled = true;
-
-                            const eventSource = new EventSource(`create_vm_in_docker.php`);
-
-                            eventSource.onmessage = function (event) {
+                            const output = document.getElementById("outputB");
+                            output.innerHTML = "";
+                        
+                            const eventSource = new EventSource("/path/to/your/script.php");
+                        
+                            eventSource.onmessage = function(event) {
                                 const data = JSON.parse(event.data);
-                                document.getElementById('outputB').innerHTML = `<p>${data.status}</p>`;
-
-                                if (data.status === "Destroy complete!") {
-                                    button.disabled = false;
-                                    eventSource.close();
+                                const text = data.status;
+                        
+                                if (text.startsWith("Running...")) {
+                                    let timerDiv = document.getElementById("timer");
+                                    if (!timerDiv) {
+                                        timerDiv = document.createElement("div");
+                                        timerDiv.id = "timer";
+                                        timerDiv.style.fontWeight = "bold";
+                                        output.appendChild(timerDiv);
+                                    }
+                                    timerDiv.textContent = text;
+                                } else {
+                                    const div = document.createElement("div");
+                                    div.textContent = text;
+                                    output.appendChild(div);
                                 }
                             };
-
-                            eventSource.onerror = function () {
-                                console.error("Error receiving updates");
-                                button.disabled = false;
+                        
+                            eventSource.onerror = function() {
+                                const div = document.createElement("div");
+                                div.textContent = "Ошибка получения данных.";
+                                div.style.color = "red";
+                                output.appendChild(div);
                                 eventSource.close();
                             };
                         }
-                    </script>
+                        </script>
                     <div class="collapse" id="collapse7">
                     <div class="d-flex gap-3">
 
