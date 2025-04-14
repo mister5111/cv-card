@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 TOKEN=`cat /usr/secure/.token`
 
 echo "Start create VM"
@@ -39,7 +38,6 @@ while true; do
 
 done
 
-
 sleep 2
 
 IP=`curl -s -X GET "https://api.github.com/repos/$REPO/actions/variables/IP_INSTANCES" \
@@ -49,8 +47,6 @@ IP=`curl -s -X GET "https://api.github.com/repos/$REPO/actions/variables/IP_INST
 
 echo "$IP"
 
-# echo "status=true"
-
 TIMER=300
 while [ $TIMER -gt 0 ]; do
     MIN=$((TIMER / 60))
@@ -59,8 +55,6 @@ while [ $TIMER -gt 0 ]; do
     sleep 1
     ((TIMER--))
 done
-
-# echo "status=false"
 
 echo "Run Destroy"
 
