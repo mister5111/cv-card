@@ -20,9 +20,13 @@ ID=`curl -s -H "Authorization: token $TOKEN" \
 while true; do
     STATUS=$(curl -s -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/runs/$ID" | jq '{status}')
+    
+    sleep 1
 
-    JOB=$(curl -H "Authorization: token $TOKENb" \
+    JOB=$(curl -H "Authorization: token $TOKEN" \
         https://api.github.com/repos/$REPO/actions/runs/$ID/jobs | jq -r '.jobs[] | .steps[] | select(.status=="in_progress") | .name')
+
+    sleep 1
 
     S=`echo "$STATUS" | jq -r '.status'`
     echo "Create status: $S, $JOB wait ."
