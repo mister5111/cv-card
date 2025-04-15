@@ -21,14 +21,18 @@ while true; do
     STATUS=$(curl -s -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/runs/$ID" | jq '{status}')
 
+    JOB=$(curl -H "Authorization: token $TOKEN" \
+         https://api.github.com/repos/$REPO/actions/runs/$ID/jobs | jq '.jobs[] | select(.status=="in_progress") | .name')
+
     S=`echo "$STATUS" | jq -r '.status'`
-    echo "Create status: $S wait ."
+    # J=`echo "$JOB" | jq -r '.name'`
+    echo "Create status: $S, $JOB wait ."
     sleep 0.5
-    echo "Create status: $S wait .."
+    echo "Create status: $S, $JOB wait .."
     sleep 0.5
-    echo "Create status: $S wait ..."
+    echo "Create status: $S, $JOB wait ..."
     sleep 0.5
-    echo "Create status: $S wait ...."
+    echo "Create status: $S, $JOB wait ...."
     sleep 0.5
 
     if [ "$S" = "completed" ]; then
@@ -44,8 +48,6 @@ IP=`curl -s -X GET "https://api.github.com/repos/$REPO/actions/variables/IP_INST
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: token $TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" | jq -r '.value'`
-
-echo "$IP"
 
 TIMER=300
 while [ $TIMER -gt 0 ]; do
