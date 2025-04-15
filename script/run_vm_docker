@@ -29,13 +29,13 @@ while true; do
     sleep 1
 
     S=`echo "$STATUS" | jq -r '.status'`
-    echo "Create status: $S, <br> $JOB wait ."
+    echo "Create status: $S <br> $JOB wait ."
     sleep 0.5
-    echo "Create status: $S, <br> $JOB wait .."
+    echo "Create status: $S <br> $JOB wait .."
     sleep 0.5
-    echo "Create status: $S, <br> $JOB wait ..."
+    echo "Create status: $S <br> $JOB wait ..."
     sleep 0.5
-    echo "Create status: $S, <br> $JOB wait ...."
+    echo "Create status: $S <br> $JOB wait ...."
     sleep 0.5
 
     if [ "$S" = "completed" ]; then
