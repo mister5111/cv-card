@@ -21,11 +21,10 @@ while true; do
     STATUS=$(curl -s -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/runs/$ID" | jq '{status}')
 
-    JOB=$(curl -H "Authorization: token $TOKEN" \
-         https://api.github.com/repos/$REPO/actions/runs/$ID/jobs | jq '.jobs[] | select(.status=="in_progress") | .name')
+    JOB=$(curl -H "Authorization: token $TOKENb" \
+        https://api.github.com/repos/$REPO/actions/runs/$ID/jobs | jq -r '.jobs[] | .steps[] | select(.status=="in_progress") | .name')
 
     S=`echo "$STATUS" | jq -r '.status'`
-    # J=`echo "$JOB" | jq -r '.name'`
     echo "Create status: $S, $JOB wait ."
     sleep 0.5
     echo "Create status: $S, $JOB wait .."
