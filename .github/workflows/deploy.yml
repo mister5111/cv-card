@@ -22,7 +22,7 @@ jobs:
 
       - name: Set permission
         run: | 
-          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           sudo -s
           apt install nginx php8.2-fpm -y
           systemctl enable php8.2-fpm
