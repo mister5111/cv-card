@@ -17,7 +17,7 @@ jobs:
           
       - name: Set permission
         run: | 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy kodi@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy kodi@46.231.204.189 <<'ENDSSH'
           sudo -s
           apt install nginx php8.2-fpm -y
           systemctl enable php8.2-fpm
