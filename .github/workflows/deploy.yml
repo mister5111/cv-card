@@ -8,17 +8,13 @@ jobs:
     steps:
       - name: Git clone
         uses: actions/checkout@v1
-
-      # - name: Create ZIP
-      #   run: |
-      #       tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
-      #       tar -cvf nginx-conf.tar conf/nginx/visit-card.conf conf/nginx/nginx.conf
           
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
           chmod 600 ~/.ssh/deploy
+          cat ~/.ssh/deploy
 
       - name: Set permission
         run: | 
