@@ -22,17 +22,15 @@ jobs:
 
       - name: Set permission
         run: | 
-            ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-            sudo -s
-            apt install nginx php8.2-fpm -y
-            systemctl enable php8.2-fpm
-
-            chown -R root:admin /etc/nginx
-            chmod -R 775 /etc/nginx
-            chown -R root:admin /var/www
-            chmod -R 775 /var/www
-
-            ENDSSH
+          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          sudo -s
+          apt install nginx php8.2-fpm -y
+          systemctl enable php8.2-fpm
+          chown -R root:admin /etc/nginx
+          chmod -R 775 /etc/nginx
+          chown -R root:admin /var/www
+          chmod -R 775 /var/www
+          ENDSSH
 
       - name: Copy nginx-conf
         run: | 
