@@ -14,11 +14,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
           chmod 600 ~/.ssh/deploy
-          cat ~/.ssh/deploy
-
+          
       - name: Set permission
         run: | 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy kodi@${{ secrets.SSH_HOST }} <<'ENDSSH'
           sudo -s
           apt install nginx php8.2-fpm -y
           systemctl enable php8.2-fpm
