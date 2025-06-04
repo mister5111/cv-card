@@ -38,7 +38,7 @@ jobs:
       
       - name: Copy project
         run: | 
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy' ./visit-card ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www
+            rsync -ahvvz --delete -e 'ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy' ./visit-card ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www
 
       - name: Deploy to server
         run: |
