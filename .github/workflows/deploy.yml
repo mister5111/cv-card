@@ -34,23 +34,16 @@ jobs:
       
       - name: Copy project
         run: | 
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' ./visit-card ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy' ./visit-card ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www
 
-      # - name: Deploy to server
-      #   run: |
-      #     ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-      #     sudo -s
-      #     mkdir /var/www/visit-card
-      #     apt install nginx php8.2-fpm -y
-      #     systemctl enable php8.2-fpm
-      #     tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
-      #     tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
-      #     cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/conf.d/
-      #     cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
-      #     chmod +x /var/www/visit-card/script/run_vm
-      #     chmod +x /var/www/visit-card/script/run_vm_docker
-      #     systemctl restart nginx
-      #     ENDSSH
+      - name: Deploy to server
+        run: |
+          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          sudo -s
+          chmod +x /var/www/visit-card/script/run_vm
+          chmod +x /var/www/visit-card/script/run_vm_docker
+          systemctl restart nginx
+          ENDSSH
 
       # - name: Create Secret
       #   run: |
