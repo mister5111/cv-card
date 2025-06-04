@@ -2,7 +2,7 @@ name: Deploy
 
 on: push
 
-jobs:
+jobs: 
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
 
       - name: Copy project
         run: | 
-            scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar nginx-conf.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deploy/
+            scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar nginx-conf.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/
 
       - name: Deploy to server
         run: |
@@ -31,12 +31,9 @@ jobs:
           mkdir /var/www/visit-card
           apt install nginx php8.2-fpm -y
           systemctl enable php8.2-fpm
-          rm /etc/nginx/sites-enabled/default
-          rm /etc/nginx/sites-available/default
           tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
           tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
-          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-enabled/
-          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/sites-available/
+          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/conf.d/
           cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
           chmod +x /var/www/visit-card/script/run_vm
           chmod +x /var/www/visit-card/script/run_vm_docker
