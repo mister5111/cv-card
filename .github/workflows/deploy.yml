@@ -29,8 +29,8 @@ jobs:
 
       - name: Copy nginx-conf
         run: | 
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' -i ~/.ssh/deploy conf/nginx/visit-card.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx/conf.d
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' -i ~/.ssh/deploy conf/nginx/nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy' conf/nginx/visit-card.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx/conf.d
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy' conf/nginx/nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx
       
       - name: Copy project
         run: | 
