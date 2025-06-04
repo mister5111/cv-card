@@ -9,10 +9,10 @@ jobs:
       - name: Git clone
         uses: actions/checkout@v1
 
-      - name: Create ZIP
-        run: |
-            tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
-            tar -cvf nginx-conf.tar conf/nginx/visit-card.conf conf/nginx/nginx.conf
+      # - name: Create ZIP
+      #   run: |
+      #       tar --exclude='.git' --exclude='conf' -cvf visit-card.tar .
+      #       tar -cvf nginx-conf.tar conf/nginx/visit-card.conf conf/nginx/nginx.conf
           
       - name: Set up SSH key
         run: |
@@ -20,29 +20,48 @@ jobs:
           echo "${{ secrets.SSH_KEY_PRIVATE }}" > ~/.ssh/deploy
           chmod 600 ~/.ssh/deploy
 
+      - name: Set permission
+        run: | 
+            ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+            sudo -s
+            apt install nginx php8.2-fpm -y
+            systemctl enable php8.2-fpm
+
+            chown -R root:admin /etc/nginx
+            chmod -R 775 /etc/nginx
+            chown -R root:admin /var/www
+            chmod -R 775 /var/www
+
+            ENDSSH
+
+      - name: Copy nginx-conf
+        run: | 
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' conf/nginx/visit-card.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx/conf.d
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' conf/nginx/nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx
+      
       - name: Copy project
         run: | 
-            scp -i ~/.ssh/deploy -o 'StrictHostKeyChecking no' visit-card.tar nginx-conf.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' ./visit-card ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www
 
-      - name: Deploy to server
-        run: |
-          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-          sudo -s
-          mkdir /var/www/visit-card
-          apt install nginx php8.2-fpm -y
-          systemctl enable php8.2-fpm
-          tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
-          tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
-          cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/conf.d/
-          cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
-          chmod +x /var/www/visit-card/script/run_vm
-          chmod +x /var/www/visit-card/script/run_vm_docker
-          systemctl restart nginx
-          ENDSSH
+      # - name: Deploy to server
+      #   run: |
+      #     ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+      #     sudo -s
+      #     mkdir /var/www/visit-card
+      #     apt install nginx php8.2-fpm -y
+      #     systemctl enable php8.2-fpm
+      #     tar -xvf visit-card.tar -C /var/www/visit-card --overwrite
+      #     tar -xvf nginx-conf.tar -C /usr/src/ --overwrite
+      #     cp -r /usr/src/conf/nginx/visit-card.conf /etc/nginx/conf.d/
+      #     cp -r /usr/src/conf/nginx/nginx.conf /etc/nginx/
+      #     chmod +x /var/www/visit-card/script/run_vm
+      #     chmod +x /var/www/visit-card/script/run_vm_docker
+      #     systemctl restart nginx
+      #     ENDSSH
 
-      - name: Create Secret
-        run: |
-          ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-          sudo mkdir -p /usr/secure
-          echo "${{ secrets.TOKEN }}" | sudo tee /usr/secure/.token > /dev/null
-          ENDSSH
+      # - name: Create Secret
+      #   run: |
+      #     ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+      #     sudo mkdir -p /usr/secure
+      #     echo "${{ secrets.TOKEN }}" | sudo tee /usr/secure/.token > /dev/null
+      #     ENDSSH
