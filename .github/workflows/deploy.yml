@@ -17,7 +17,7 @@ jobs:
           
       - name: Set permission
         run: | 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy kodi@46.231.204.189 <<'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           sudo -s
           apt install nginx php8.2-fpm -y
           systemctl enable php8.2-fpm
@@ -29,8 +29,8 @@ jobs:
 
       - name: Copy nginx-conf
         run: | 
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' conf/nginx/visit-card.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx/conf.d
-            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' conf/nginx/nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' -i ~/.ssh/deploy conf/nginx/visit-card.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx/conf.d
+            rsync -ahvz --delete -e 'ssh -o StrictHostKeyChecking=no' -i ~/.ssh/deploy conf/nginx/nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/etc/nginx
       
       - name: Copy project
         run: | 
