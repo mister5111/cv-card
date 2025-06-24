@@ -28,6 +28,7 @@ jobs:
           addgroup admin
           echo "# User rules for admin" >> /etc/sudoers.d/admin-group-sudoers
           echo "%admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/admin-group-sudoers
+          usermod -a -G admin ${{ secrets.SSH_USER }}
           chown -R root:admin /etc/nginx
           chmod -R 775 /etc/nginx
           chown -R root:admin /var/www
